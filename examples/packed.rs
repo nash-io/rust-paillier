@@ -1,4 +1,4 @@
-use paillier::*;
+use paillier_common::*;
 
 fn main() {
     let (ek, dk) = Paillier::keypair().keys();

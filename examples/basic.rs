@@ -1,4 +1,4 @@
-use paillier::*;
+use paillier_common::*;
 
 fn main() {
     // first generate a fresh keypair, where

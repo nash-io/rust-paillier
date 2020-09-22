@@ -1,4 +1,4 @@
-use paillier::{
+use paillier_common::{
     Add, Decrypt, DecryptionKey, EncodedCiphertext, Encrypt, EncryptionKey, KeyGeneration,
     Paillier, Rerandomize,
 };

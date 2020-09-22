@@ -1,7 +1,12 @@
 [package]
-name = "paillier"
-version = "0.3.4"
+name = "paillier-common"
+version = "0.1.0"
 edition = "2018"
+authors = ["Robert Annesi <robert@nash.io>", "Ethan Fast <ethan@nash.io>"]
+license = "MIT"
+description = "paillier over bigint traits provided by rust-bigint"
+repository = "https://github.com/nash-io/rust-paillier"
+keywords = ["paillier", "cryptography", "homomorphic encryption"]
 
 [features]
 rust_gmp = ["rust-bigint/rust_gmp"]

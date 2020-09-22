@@ -1,7 +1,7 @@
 use bencher::{benchmark_group, benchmark_main, Bencher};
 use rust_bigint::traits::*;
 
-use paillier::*;
+use paillier_common::*;
 
 mod helpers;
 use helpers::*;

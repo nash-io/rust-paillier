@@ -1,6 +1,6 @@
 use bencher::{benchmark_group, benchmark_main, Bencher};
 
-use paillier::*;
+use paillier_common::*;
 
 mod helpers;
 use helpers::*;
