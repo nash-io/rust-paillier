@@ -1,3 +1,5 @@
+*Note*: Nash is not the original creator of this repository. Several organizations have forked it. Our fork provides abstractions that work over arbitrary BigInt representation.
+
 # Paillier
 
 [![Build Status](https://travis-ci.org/mortendahl/rust-paillier.svg)](https://travis-ci.org/mortendahl/rust-paillier)

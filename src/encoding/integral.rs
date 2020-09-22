@@ -3,7 +3,7 @@
 use std::borrow::Borrow;
 use std::marker::PhantomData;
 
-use curv::arithmetic::traits::*;
+use rust_bigint::traits::*;
 
 use super::{pack, unpack, EncodedCiphertext};
 use crate::traits::{Add, Decrypt, Encrypt, Mul, Rerandomize};

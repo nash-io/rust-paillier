@@ -5,7 +5,6 @@ use serde::{Deserialize, Serialize};
 pub mod core;
 pub mod encoding;
 pub mod keygen;
-pub mod serialize;
 pub mod traits;
 
 pub use crate::core::*;
@@ -13,7 +12,7 @@ pub use encoding::*;
 pub use keygen::*;
 pub use traits::*;
 
-pub use curv::arithmetic::big_gmp::BigInt;
+pub use rust_bigint::BigInt;
 
 /// Main struct onto which most operations are added.
 pub struct Paillier;
@@ -21,10 +20,10 @@ pub struct Paillier;
 /// Keypair from which encryption and decryption keys can be derived.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Keypair {
-    #[serde(with = "crate::serialize::bigint")]
+    #[serde(with = "rust_bigint::serialize::bigint")]
     pub p: BigInt, // TODO[Morten] okay to make non-public?
 
-    #[serde(with = "crate::serialize::bigint")]
+    #[serde(with = "rust_bigint::serialize::bigint")]
     pub q: BigInt, // TODO[Morten] okay to make non-public?
 }
 
@@ -33,7 +32,7 @@ pub struct Keypair {
 /// Used e.g. for serialization of `EncryptionKey`.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MinimalEncryptionKey {
-    #[serde(with = "crate::serialize::bigint")]
+    #[serde(with = "rust_bigint::serialize::bigint")]
     pub n: BigInt,
 }
 
@@ -42,10 +41,10 @@ pub struct MinimalEncryptionKey {
 /// Used e.g. for serialization of `DecryptionKey`.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MinimalDecryptionKey {
-    #[serde(with = "crate::serialize::bigint")]
+    #[serde(with = "rust_bigint::serialize::bigint")]
     pub p: BigInt,
 
-    #[serde(with = "crate::serialize::bigint")]
+    #[serde(with = "rust_bigint::serialize::bigint")]
     pub q: BigInt,
 }
 
@@ -72,5 +71,5 @@ pub struct RawPlaintext<'b>(pub Cow<'b, BigInt>);
 /// Encrypted message without type information.
 ///
 /// Used mostly for internal purposes and advanced use-cases.
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RawCiphertext<'b>(pub Cow<'b, BigInt>);

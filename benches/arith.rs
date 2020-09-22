@@ -1,5 +1,5 @@
 use bencher::{benchmark_group, benchmark_main, Bencher};
-use curv::arithmetic::traits::*;
+use rust_bigint::traits::*;
 
 use paillier::*;
 

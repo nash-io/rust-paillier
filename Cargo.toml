@@ -3,18 +3,22 @@ name = "paillier"
 version = "0.3.4"
 edition = "2018"
 
+[features]
+rust_gmp = ["rust-bigint/rust_gmp"]
+num_bigint = ["rust-bigint/num_bigint", "num-traits", "num-integer"]
+
 [dependencies]
 rayon = "1.1"
 serde = { version = "1.0", features = ["derive"] }
+num-traits = { version = "0.2", optional = true }
+num-integer = { version = "0.1", optional = true }
+rust-bigint = "1.1.0"
+rand = "0.6"
 
-[dependencies.curv]
-git = "https://github.com/KZen-networks/curv"
-tag = "v0.2.3"
 
 [dev-dependencies]
 bencher = "0.1"
 serde_json = "1.0"
-rand = "0.6"
 
 [[bench]]
 name = "arith"
@@ -40,6 +44,3 @@ name = "core"
 
 [[example]]
 name = "packed"
-
-[[example]]
-name = "simple-voting"

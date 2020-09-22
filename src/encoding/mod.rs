@@ -2,17 +2,19 @@
 
 use std::marker::PhantomData;
 
-use curv::arithmetic::traits::ConvertFrom;
+use rust_bigint::traits::ConvertFrom;
+#[cfg(feature = "num_bigint")]
+use num_traits::One;
 use serde::{Deserialize, Serialize};
 
 pub mod integral;
 
-use crate::BigInt;
+use rust_bigint::BigInt;
 
 /// Encrypted message with type information.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct EncodedCiphertext<T> {
-    #[serde(with = "crate::serialize::bigint")]
+    #[serde(with = "rust_bigint::serialize::bigint")]
     raw: BigInt,
     components: usize,
     _phantom: PhantomData<T>,

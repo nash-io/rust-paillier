@@ -1,6 +1,10 @@
 //! Key generation following standard recommendations.
 
-use curv::arithmetic::traits::*;
+use rust_bigint::traits::{BitManipulation, Modulo, NumberTests, Samplable};
+#[cfg(feature = "num_bigint")]
+use num_integer::Integer;
+#[cfg(feature = "num_bigint")]
+use num_traits::{One, Zero};
 
 use crate::traits::*;
 use crate::{BigInt, Keypair, Paillier};
@@ -52,15 +56,17 @@ impl PrimeSampable for BigInt {
         }
     }
 
-    fn sample_safe_prime(bitsize: usize) -> Self{
+    fn sample_safe_prime(bitsize: usize) -> Self {
         // q = 2p + 1;
         let two = BigInt::from(2);
-        loop{
+        loop {
             let q = PrimeSampable::sample_prime(bitsize);
-            let p = (&q - BigInt::one()).div_floor(&two) ;
-            if is_prime(&p) {return q};
+            let tmp: BigInt = &q - BigInt::one();
+            let p = tmp.div_floor(&two);
+            if is_prime(&p) {
+                return q;
+            };
         }
-
     }
 }
 
@@ -144,7 +150,7 @@ fn rewrite(n: &BigInt) -> (BigInt, BigInt) {
     let mut s = BigInt::zero();
     let one = BigInt::one();
 
-    while BigInt::is_even(&d) {
+    while NumberTests::is_even(&d) {
         d >>= 1_usize;
         s = &s + &one;
     }

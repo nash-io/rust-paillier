@@ -10,7 +10,9 @@ use crate::{
     BigInt, DecryptionKey, EncryptionKey, Keypair, MinimalDecryptionKey, MinimalEncryptionKey,
     Paillier, RawCiphertext, RawPlaintext,
 };
-use curv::arithmetic::traits::*;
+use rust_bigint::traits::*;
+#[cfg(feature = "num_bigint")]
+use num_traits::One;
 
 impl Keypair {
     /// Generate default encryption and decryption keys.
@@ -131,7 +133,7 @@ impl<'de> Deserialize<'de> for DecryptionKey {
 pub struct Randomness(pub BigInt);
 
 #[derive(Debug, PartialEq)]
-pub struct PrecomputedRandomness(BigInt);
+pub struct PrecomputedRandomness(pub BigInt);
 
 impl Randomness {
     pub fn sample(ek: &EncryptionKey) -> Randomness {
@@ -602,7 +604,7 @@ mod tests {
 
     #[test]
     fn test_failing_deserialize() {
-        let illformatted = "{\"n\":\"12345abcdef\"}";
+        let illformatted = "{\"n\":\"12345abcdefg\"}";
 
         let result: Result<EncryptionKey, _> = serde_json::from_str(&illformatted);
         assert!(result.is_err())
