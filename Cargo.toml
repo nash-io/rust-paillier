@@ -9,6 +9,7 @@ repository = "https://github.com/nash-io/rust-paillier"
 keywords = ["paillier", "cryptography", "homomorphic", "encryption"]
 
 [features]
+default = ["rust_gmp"]
 rust_gmp = ["rust-bigint/rust_gmp"]
 num_bigint = ["rust-bigint/num_bigint", "num-traits", "num-integer"]
 
